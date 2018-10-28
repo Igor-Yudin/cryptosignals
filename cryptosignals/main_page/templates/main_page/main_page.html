@@ -1,0 +1,24 @@
+{% extends 'signals/base.html' %}
+
+{% load static %}
+
+{% block title %}Crypto Signals{% endblock %}
+
+{% block content %}
+<h1>Hello</h1>
+<form id="form_subscribe" action="{% url 'subscribe_ajax' %}" method="POST">
+	{% csrf_token %}
+	<p><input type="hidden" name="subscribe" value="True"></p>
+	<p><input type="text" name="email" placeholder="email"></p>
+	<p><input type="text" name="telegram" placeholder="telegram"></p>
+	<p><input type="text" name="slack" placeholder="slack"></p>
+
+	<br>
+
+	<p><input type="submit" value="Subscribe"></p>
+</form>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'main_page/js/subscribe_ajax.js' %}"></script>
+{% endblock js %}
