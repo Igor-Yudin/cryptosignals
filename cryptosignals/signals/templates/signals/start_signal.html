@@ -4,21 +4,26 @@
 {% block title %}Start signal{% endblock %}
 
 {% block content %}
-<form id="form_start_signal" method="POST" action="{% url 'start_signal_ajax' %}">
-	{% csrf_token %}
-	<select name="pair">
-		{% for pair in pairs %}
-			<option value="{{ pair.1 }}">{{ pair.0 }}</option>
-		{% endfor %}
-	</select>
-	<select name="period">
-		{% for period in periods %}
-			<option value="{{ period.1 }}">{{ period.0 }}</option>
-		{% endfor %}
-	</select>
-	<input type="hidden" name="start_signal" value="true">
-	<input type="submit" value="Start signal">
-</form>
+<div class="container">
+	<h2>Start signal</h2>
+	<form id="form_start_signal" method="POST" action="{% url 'start_signal_ajax' %}">
+		{% csrf_token %}
+		<p><select name="pair">
+			{% for pair in pairs %}
+				<option value="{{ pair.1 }}">{{ pair.0 }}</option>
+			{% endfor %}
+		</select></p>
+		<p><select name="period">
+			{% for period in periods %}
+				<option value="{{ period.1 }}">{{ period.0 }}</option>
+			{% endfor %}
+		</select></p>
+		<p><input type="hidden" name="start_signal" value="true"></p>
+		<p><input type="submit" value="Start signal"></p>
+
+		<div id="result"></div>
+	</form>
+</div>
 {% endblock %}
 
 {% block js %}

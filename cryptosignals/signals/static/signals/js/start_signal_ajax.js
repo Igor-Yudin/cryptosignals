@@ -15,6 +15,8 @@ $(function() {
       success: function(response) {
         if (response.is_ok == true) {
           console.log('start');
+          var res = $('#result');
+          res.html('<p>Signal is started</p>');
         }
       }
     })
