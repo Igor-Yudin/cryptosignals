@@ -4,21 +4,211 @@
 
 {% block title %}Crypto Signals{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'main_page/css/grayscale.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+<!-- fonts -->
+<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<h1>Hello</h1>
-<form id="form_subscribe" action="{% url 'subscribe_ajax' %}" method="POST">
-	{% csrf_token %}
-	<p><input type="hidden" name="subscribe" value="True"></p>
-	<p><input type="text" name="email" placeholder="email"></p>
-	<p><input type="text" name="telegram" placeholder="telegram"></p>
-	<p><input type="text" name="slack" placeholder="slack"></p>
+<body id="page-top">
 
-	<br>
+	<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Crypto Signals</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#subscribe">Subscribe</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-	<p><input type="submit" value="Subscribe"></p>
-</form>
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+          <h1 class="mx-auto my-0 text-uppercase">CryptoSignals</h1>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">New crypto signal service for most modern messengers.</h2>
+          <a href="#about" class="btn btn-primary js-scroll-trigger">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-white mb-4">Support for large modern cryptocurrencies</h2>
+            <p class="text-white-50">CryptoSignals is now free to use. 
+              <a href="#subscribe">Subscribe</a> and and you will receive signals as you like.</p>
+          </div>
+        </div>
+        <img src="{% static 'main_page/img/ipad.png' %}" class="img-fluid" alt="">
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section bg-light">
+      <div class="container">
+
+        <!-- Project One Row -->
+        <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="{% static 'main_page/img/convenience.jpg' %} " alt="">
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+                  <h4 class="text-white">Convenience</h4>
+                  <p class="mb-0 text-white-50">Libero beatae quod voluptatibus expedita ea saepe recusandae ab animi deleniti, voluptates soluta error ad ipsum nemo doloribus reprehenderit necessitatibus illo, sequi soluta pariatur ducimus? Explicabo amet aliquid id impedit, libero doloribus excepturi quis molestias dolorum quo expedita dolore repellendus aliquid ratione, ducimus aliquam molestiae vel.</p>
+                  <hr class="d-none d-lg-block mb-0 ml-0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Two Row -->
+        <div class="row justify-content-center no-gutters">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="{% static 'main_page/img/accuracy.jpg' %}" alt="">
+          </div>
+          <div class="col-lg-6 order-lg-first">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-right">
+                  <h4 class="text-white">Accuracy</h4>
+                  <p class="mb-0 text-white-50">Placeat labore fugiat corrupti earum quas enim, qui et autem, et molestiae ea nostrum id reprehenderit temporibus assumenda, dolore ipsum error in facilis deserunt molestiae, animi illo est earum omnis laboriosam ipsa molestiae ad qui.</p>
+                  <hr class="d-none d-lg-block mb-0 mr-0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signup Section -->
+    <section id="subscribe" class="signup-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+            <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+            <h2 class="text-white mb-5">Subscribe to receive signals!</h2>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <h2>You've subscribed!</h2>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+            <form id="form_subscribe" action="{% url 'subscribe_ajax' %}" method="POST">
+              {% csrf_token %}
+			  <input type="hidden" name="subscribe" value="True">
+              <input type="email" name="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
+              <input type="text" name="telegram" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputTelegram" placeholder="Enter telegram account...">
+              <input type="text" name="slack" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputSlack" placeholder="Enter slack account...">
+              <button type="submit" class="btn btn-primary mx-auto" id="btn-subscribe" data-target="#exampleModal">Subscribe</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section bg-black">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Address</h4>
+                <hr class="my-4">
+                <div class="small text-black-50">404044 Moscow, Russia</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-envelope text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Email</h4>
+                <hr class="my-4">
+                <div class="small text-black-50">
+                  <a href="mailto:harry.fexchange@gmail.com">harry.fexchange@gmail.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Phone</h4>
+                <hr class="my-4">
+                <div class="small text-black-50">+7 (904) 776-____</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="social d-flex justify-content-center">
+          <a href="https://github.com/Igor-Yudin/cryptosignals" class="mx-2">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black small text-center text-white-50">
+      <div class="container">
+        Copyright &copy; Your Website 2018
+      </div>
+    </footer>
+</body>
+
 {% endblock %}
 
 {% block js %}
 <script src="{% static 'main_page/js/subscribe_ajax.js' %}"></script>
+<script src="{% static 'main_page/js/grayscale.js' %}"></script>
+<script src="{% static 'main_page/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'main_page/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock js %}
