@@ -9,7 +9,7 @@ from background_task import background
 
 from . exchange import ExchangeInterface
 from . indicators import Stochastic
-from . notifiers import GmailNotifier
+from . notifiers import GmailNotifier, SlackNotifier
 from . models import Client
 from . models import Signal
 from . models import PAIRS
@@ -27,16 +27,16 @@ def start_signal_ajax(request):
     if request.POST.get('start_signal'):
         pair = request.POST.get('pair')
         period = request.POST.get('period')
-        check_signals_and_notify_clients(pair, period)
+        _check_signals_and_notify_clients(pair, period)
         return HttpResponse(json.dumps({'response': 'Signal is started', 'is_ok': True}))
     else:
         return HttpResponse(json.dumps({'response': 'Wrong request', 'is_ok': False}))
 
-def check_signals_and_notify_clients(pair, period):
+def _check_signals_and_notify_clients(pair, period):
     period_in_secs = period_into_secs(period)
-    check_signal(pair, period, repeat=period_in_secs, repeat_until=None)
+    _check_signal(pair, period, repeat=_period_in_secs, repeat_until=None)
 
-def period_into_secs(period):
+def _period_into_secs(period):
     pattern = re.compile('(\d+)([a-zA-Z])')
     matches = pattern.match(period)
     period_number = matches.group(1)
@@ -51,7 +51,7 @@ def period_into_secs(period):
     return time_values[period_letter] * int(period_number)
 
 @background
-def check_signal(pair, period):
+def _check_signal(pair, period):
     historical_data = EI.get_historical_data(pair, period)
     stochastic = Stochastic(historical_data)
 
@@ -60,13 +60,16 @@ def check_signal(pair, period):
     if action:
         print(period)
         signal = Signal.objects.create(pair=pair, period=period, action=action)
-        notify_clients(signal)
+        _notify_clients(signal)
 
     print("[INFO] {pair} {period}: {action}".format(pair=pair, period=period, action=action))
 
-def notify_clients(signal):
+def _notify_clients(signal):
     clients = Client.objects.all()
 
     clients_emails = [client.email for client in clients if client.email]
     gmail_notifier = GmailNotifier('harry.fexchange@gmail.com', 'changeM20l', clients_emails)
     gmail_notifier.notify(signal.pair, signal.action)
+
+    slack_notifier = SlackNotifier('https://hooks.slack.com/services/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')
+    slack_notifier.notify('{signal_pair}: {signal_action}'.format(signal_pair=signal.pair, signal_action=signal.action))
