@@ -33,8 +33,8 @@ def start_signal_ajax(request):
         return HttpResponse(json.dumps({'response': 'Wrong request', 'is_ok': False}))
 
 def _check_signals_and_notify_clients(pair, period):
-    period_in_secs = period_into_secs(period)
-    _check_signal(pair, period, repeat=_period_in_secs, repeat_until=None)
+    period_in_secs = _period_into_secs(period)
+    _check_signal(pair, period, repeat=period_in_secs, repeat_until=None)
 
 def _period_into_secs(period):
     pattern = re.compile('(\d+)([a-zA-Z])')
