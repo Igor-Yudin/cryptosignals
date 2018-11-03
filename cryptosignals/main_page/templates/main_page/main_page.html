@@ -125,7 +125,7 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <h2>You've subscribed!</h2>
+			        <h2 id="modal_message">You've subscribed!</h2>
 			      </div>
 			    </div>
 			  </div>
@@ -134,7 +134,7 @@
             <form id="form_subscribe" action="{% url 'subscribe_ajax' %}" method="POST">
               {% csrf_token %}
       			  <input type="hidden" name="subscribe" value="True">
-              <input type="email" name="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
+              <input type="email" name="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="input_email" placeholder="Enter email address...">
               <button type="submit" class="btn btn-primary mx-auto" id="btn-subscribe" data-target="#exampleModal">Subscribe</button>
             </form>
 
