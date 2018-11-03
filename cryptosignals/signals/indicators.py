@@ -14,10 +14,15 @@ class Stochastic(Indicator):
 		self.overbought = overbought
 		self.oversold = oversold
 
-		self.fast_stochastic = self._calc_fast()
+		# self.fast_stochastic = self._calc_fast()
 		# self.slow_stochastic = self._calc_slow()
 
 	def check_signal(self):
+		try:
+			self.fast_stochastic = self._calc_fast()
+		except:
+			return None
+
 		if (self.fast_stochastic[-2] < self.oversold and
 			self.fast_stochastic[-1] > self.oversold):
 			return 'BUY'
@@ -32,6 +37,9 @@ class Stochastic(Indicator):
 		for i in range(len(self.opens) - self.period, len(self.opens)):
 			start_index = i - self.period + 1
 			last_index = start_index + self.period
+
+			if start_index < 0:
+				raise Exception('Not enough timeframes to calculate stochastic')
 
 			lowest = min(self.lows[start_index:last_index])
 			highest = max(self.highs[start_index:last_index])

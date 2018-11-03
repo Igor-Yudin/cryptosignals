@@ -58,7 +58,6 @@ def _check_signal(pair, period):
     action = stochastic.check_signal()
 
     if action:
-        print(period)
         signal = Signal.objects.create(pair=pair, period=period, action=action)
         _notify_clients(signal)
 
