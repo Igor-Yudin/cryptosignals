@@ -60,12 +60,13 @@ class TelegramNotifier:
             message (str): The message to send.
         """
 
-        max_message_size = 4096
-        message_chunks = self.chunk_message(message=message, max_message_size=max_message_size)
+        assert len(message) <= 4096
+        # max_message_size = 4096
+        # message_chunks = self.chunk_message(message=message, max_message_size=max_message_size)
         #print(message_chunks)
         #exit()
-        for message_chunk in message_chunks:
-            self.bot.send_message(chat_id=self.chat_id, text=message_chunk, parse_mode=self.parse_mode)
+        # for message_chunk in message_chunks:
+        self.bot.send_message(chat_id=self.chat_id, text=message, parse_mode=self.parse_mode)
 
 class SlackNotifier:
     """Class for handling slack notifications

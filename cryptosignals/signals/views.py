@@ -9,7 +9,7 @@ from background_task import background
 
 from . exchange import ExchangeInterface
 from . indicators import Stochastic
-from . notifiers import GmailNotifier, SlackNotifier
+from . notifiers import GmailNotifier, SlackNotifier, TelegramNotifier
 from . models import Client
 from . models import Signal
 from . models import PAIRS
@@ -73,3 +73,6 @@ def _notify_clients(signal):
 
     slack_notifier = SlackNotifier('https://hooks.slack.com/services/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')
     slack_notifier.notify('{signal_pair}: {signal_action}'.format(signal_pair=signal.pair, signal_action=signal.action))
+
+    telegram_nitifier = TelegramNotifier('629041496:AAGrh2aLn5ix1ZQK48iwkg7u53nHXje7qxQ', '-305542134', None)
+    telegram_nitifier.notify('{signal_pair}: {signal_action}'.format(signal_pair=signal.pair, signal_action=signal.action))
