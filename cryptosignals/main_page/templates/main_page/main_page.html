@@ -5,7 +5,7 @@
 {% block title %}Crypto Signals{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'main_page/css/grayscale.css' %}">
+<link rel="stylesheet" href="{% static 'main_page/css/main_page.css' %}">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 
 <!-- fonts -->
@@ -133,10 +133,8 @@
 
             <form id="form_subscribe" action="{% url 'subscribe_ajax' %}" method="POST">
               {% csrf_token %}
-			  <input type="hidden" name="subscribe" value="True">
+      			  <input type="hidden" name="subscribe" value="True">
               <input type="email" name="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
-              <input type="text" name="telegram" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputTelegram" placeholder="Enter telegram account...">
-              <input type="text" name="slack" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputSlack" placeholder="Enter slack account...">
               <button type="submit" class="btn btn-primary mx-auto" id="btn-subscribe" data-target="#exampleModal">Subscribe</button>
             </form>
 
@@ -188,11 +186,18 @@
         </div>
 
         <div class="social d-flex justify-content-center">
+          <a href="https://t.me/joinchat/EfQDOhI2M_a4xCU_uBsvJQ" class="mx-2">
+            <i class="fab fa-telegram"></i>
+          </a>
+
           <a href="https://github.com/Igor-Yudin/cryptosignals" class="mx-2">
             <i class="fab fa-github"></i>
           </a>
-        </div>
 
+          <a href="https://join.slack.com/t/fex-cryptosignals/shared_invite/enQtNDcwOTQzNjQ4MDE5LTdmYzc3OTM3MDJkNDA5OGJhNGFkY2QxMmUwNThmMWIzMGEyMWViZDFiMTg0OGU4ZGUwMjFlMWU4Nzc2NTEwNWM" class="mx-2">
+            <i class="fab fa-slack"></i>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -208,7 +213,7 @@
 
 {% block js %}
 <script src="{% static 'main_page/js/subscribe_ajax.js' %}"></script>
-<script src="{% static 'main_page/js/grayscale.js' %}"></script>
+<script src="{% static 'main_page/js/main_page.js' %}"></script>
 <script src="{% static 'main_page/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 <script src="{% static 'main_page/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 {% endblock js %}

@@ -4,7 +4,7 @@ from . models import Signal
 from . models import Client
 
 class ClientAdmin(admin.ModelAdmin):
-	list_display = ('email', 'telegram', 'slack')
+	list_display = ('email',)
 
 class SignalAdmin(admin.ModelAdmin):
 	list_display = ('pair', 'period', 'time', 'action')

@@ -28,5 +28,5 @@ class Signal(models.Model):
 
 class Client(models.Model):
 	email = models.CharField(max_length=50, default="", blank=True)
-	telegram = models.CharField(max_length=50, default="", blank=True)
-	slack = models.CharField(max_length=50, default="", blank=True)
+	# telegram = models.CharField(max_length=50, default="", blank=True)
+	# slack = models.CharField(max_length=50, default="", blank=True)

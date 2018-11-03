@@ -11,10 +11,10 @@ def show_main_page(request):
 def subscribe_ajax(request):
     if request.POST.get('subscribe'):
         email = request.POST.get('email')
-        telegram = request.POST.get('telegram')
-        slack = request.POST.get('slack')
+        # telegram = request.POST.get('telegram')
+        # slack = request.POST.get('slack')
 
-        client = Client.objects.create(email=email, telegram=telegram, slack=slack)
+        client = Client.objects.create(email=email)
 
         return HttpResponse(json.dumps({"is_ok": True}))
     else:
