@@ -25,7 +25,10 @@ SECRET_KEY = 'af12psg5qebl#!d*vgjz61n)#=$!wv5+#kj4w$x+xe+8y4ig7h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'cryptosignals.pythonanywhere.com'
+]
 
 
 # Application definition
