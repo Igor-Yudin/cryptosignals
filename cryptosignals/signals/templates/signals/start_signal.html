@@ -23,9 +23,32 @@
 
 		<div id="result"></div>
 	</form>
+
+	<h2>Emit testing signal</h2>
+	<form id="form_emit_signal" method="POST" action="{% url 'emit_signal_ajax' %}">
+		{% csrf_token %}
+		<p><select name="pair">
+			{% for pair in pairs %}
+				<option value="{{ pair.1 }}">{{ pair.0 }}</option>
+			{% endfor %}
+		</select></p>
+		<p><select name="period">
+			{% for period in periods %}
+				<option value="{{ period.1 }}">{{ period.0 }}</option>
+			{% endfor %}
+		</select></p>
+		<p><select name="action">
+			{% for action in actions %}
+				<option value="{{ action.1 }}">{{ action.0 }}</option>
+			{% endfor %}
+		</select></p>
+		<p><input type="hidden" name="emit_signal" value="true"></p>
+		<p><input type="submit" value="Emit signal"></p>
+	</form>
 </div>
 {% endblock %}
 
 {% block js %}
 	<script src="{% static 'signals/js/start_signal_ajax.js' %}"></script>
+	<script src="{% static 'signals/js/emit_signal_ajax.js' %}"></script>
 {% endblock %}

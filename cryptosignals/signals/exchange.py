@@ -7,11 +7,6 @@ import ccxt
 from tenacity import retry, retry_if_exception_type, stop_after_attempt
 
 
-from . models import PERIODS
-
-
-PERIODS = (period[1] for period in PERIODS)
-
 class ExchangeInterface():
     """Interafce for perfoming queries against exchange API.
     """
