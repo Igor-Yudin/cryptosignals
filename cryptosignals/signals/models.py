@@ -12,11 +12,8 @@ ACTIONS = (
 
 PERIODS = (
 	("5 minute", "5m"),
-	("10 minutes", "10m"),
-	("15 minutes", "15m"),
 	("30 minutes", "30m"),
 	("1 hour", "1h"),
-	("4 hours", "4h"),
 	("1 day", "1d"),
 )
 

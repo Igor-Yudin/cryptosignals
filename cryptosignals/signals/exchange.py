@@ -17,7 +17,7 @@ class ExchangeInterface():
     """
     def __init__(self):
         self.exchange = ccxt.bittrex({'verobse': True})
-        self.timeframes = PERIODS
+        self.timeframes = ['5m', '30m', '1h', '1d']
 
     @retry(retry=retry_if_exception_type(ccxt.NetworkError), stop=stop_after_attempt(3))
     def get_historical_data(self, market_pair, time_unit, start_date=None, max_periods=100):
