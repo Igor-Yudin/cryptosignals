@@ -4,15 +4,20 @@ from datetime import datetime, timedelta, timezone
 
 
 import ccxt
-from tenacity import retry, retry_if_exception_type, stop_after_attempt 
+from tenacity import retry, retry_if_exception_type, stop_after_attempt
 
+
+from . models import PERIODS
+
+
+PERIODS = (period[1] for period in PERIODS)
 
 class ExchangeInterface():
     """Interafce for perfoming queries against exchange API.
     """
     def __init__(self):
         self.exchange = ccxt.bittrex({'verobse': True})
-        self.timeframes = ['5m']
+        self.timeframes = PERIODS
 
     @retry(retry=retry_if_exception_type(ccxt.NetworkError), stop=stop_after_attempt(3))
     def get_historical_data(self, market_pair, time_unit, start_date=None, max_periods=100):
