@@ -1,5 +1,7 @@
 import json
 import re
+import os
+import requests
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -17,6 +19,7 @@ from . models import PERIODS
 from . models import ACTIONS
 
 EI = ExchangeInterface()
+MAILGUN_API = os.environ['MAILGUN_API']
 
 @permission_required('is_superuser')
 def start_signal(request):
@@ -65,21 +68,30 @@ def _check_signal(pair, period):
     print("[INFO] {pair} {period}: {action}".format(pair=pair, period=period, action=action))
 
 def _notify_clients(signal):
-    message_theme = signal.pair
-    message_body = '{signal_pair}: {signal_action} in next {signal_period}'.format(signal_pair=signal.pair,
+    message_subject = signal.pair
+    message_text = '{signal_pair}: {signal_action} in next {signal_period}'.format(signal_pair=signal.pair,
                                                                                    signal_action=signal.action,
                                                                                    signal_period=signal.period)
     clients = Client.objects.all()
 
     clients_emails = [client.email for client in clients if client.email]
-    gmail_notifier = GmailNotifier('harry.fexchange@gmail.com', 'changeM20l', clients_emails)
-    gmail_notifier.notify(message_theme, message_body)
+    for email in clients_emails:
+        _send_email_message(email, message_subject, message_text)
 
     slack_notifier = SlackNotifier('https://hooks.slack.com/services/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')
-    slack_notifier.notify(message_body)
+    slack_notifier.notify(message_text)
 
     telegram_nitifier = TelegramNotifier('629041496:AAGrh2aLn5ix1ZQK48iwkg7u53nHXje7qxQ', '-305542134', None)
-    telegram_nitifier.notify(message_body)
+    telegram_nitifier.notify(message_text)
+
+def _send_email_message(email_to, subject, text):
+    return requests.post(
+        "https://api.mailgun.net/v3/sandboxa509ca0a228442788c042d4835c9ea15.mailgun.org/messages",
+        auth=("api", MAILGUN_API),
+        data={"from": "CryptoSignals <harry.fexchange@gmail.com>",
+              "to": "<{email_to}>".format(email_to=email_to),
+              "subject": subject,
+              "text": text})
 
 @permission_required('is_superuser')
 def emit_signal_ajax(request):
